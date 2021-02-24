@@ -36,11 +36,14 @@ services:
     build: 
       context: ./nginx
     image: souzag32/nginx
+    entrypoint: dockerize -wait tcp://app:3000 -timeout 30s nginx -g "daemon off;"
     container_name: nginx
     networks: 
       - node-network
     ports: 
       - "8080:80"
+    depends_on: 
+       - app
 
 
 networks: 
