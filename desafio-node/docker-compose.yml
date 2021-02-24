@@ -13,8 +13,6 @@ services:
       - node-network
     volumes: 
        - ./node/index.js:/usr/src/app/index.js
-    ports: 
-      - "3000:3000"
     depends_on: 
        - db
 
@@ -33,6 +31,16 @@ services:
       - MYSQL_USER=root
     networks: 
       - node-network
+
+  nginx:
+    build: 
+      context: ./nginx
+    image: souzag32/nginx
+    container_name: nginx
+    networks: 
+      - node-network
+    ports: 
+      - "8080:80"
 
 
 networks: 

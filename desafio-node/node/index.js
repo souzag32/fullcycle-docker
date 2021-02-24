@@ -21,10 +21,11 @@ const executeQuery = (mysql, callback) => {
     const select = `SELECT * FROM people WHERE name = 'Wesley'`
     
    connection.query(select, function (err, results){
-        let nomes = ''
+        let nomes = '<ul>'
         results && results.forEach(people => {
-            nomes += `<div>${people.name}</div>`
+            nomes += `<li>${people.name}</li>`
         })
+        nomes += '</ul>'
         return callback(nomes)
     })
     
@@ -34,7 +35,7 @@ const executeQuery = (mysql, callback) => {
 
 app.get('/', (req, res) => {
         executeQuery(mysql, (result) => {
-            res.send(`<h1>Full Cycle</h1>${result}`)
+            res.send(`<h1>Full Cycle Rocks!</h1>${result}`)
         })
 })
 
